@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jacopo Zito — Audit Sicurezza Informatica Roma</title>
+<meta name="description" content="Audit di sicurezza informatica per PMI a Roma. Verifica reti, GDPR, vulnerabilità. Report in 48h. Prezzo fisso €499,99 IVA inclusa.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+--navy:#0a1628;
+--navy2:#112240;
+--navy3:#1a3054;
+--accent:#00d4a1;
+--accent2:#00b589;
+--text:#e8f0fe;
+--muted:#8fa3bf;
+--border:rgba(0,212,161,0.15);
+--card:rgba(17,34,64,0.8);
+}
+html{scroll-behavior:smooth}
+body{font-family:'Sora',sans-serif;background:var(--navy);color:var(--text);line-height:1.7;overflow-x:hidden}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,22,40,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 2rem}
+.nav-inner{max-width:1100px;margin:auto;display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{font-size:1.1rem;font-weight:700;color:var(--accent);letter-spacing:0.05em;text-decoration:none}
+.logo span{color:var(--text);font-weight:300}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:0.875rem;font-weight:400;letter-spacing:0.03em;transition:color 0.2s}
+.nav-links a:hover{color:var(--accent)}
+.nav-cta{background:var(--accent);color:var(--navy);padding:0.5rem 1.25rem;border-radius:4px;font-weight:600;font-size:0.875rem;text-decoration:none;transition:background 0.2s}
+.nav-cta:hover{background:var(--accent2)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.hamburger span{width:22px;height:2px;background:var(--text);border-radius:2px;transition:all 0.3s}
+.mobile-menu{display:none;position:fixed;top:64px;left:0;right:0;background:rgba(10,22,40,0.98);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:1.5rem 2rem;z-index:99;flex-direction:column;gap:1.25rem}
+.mobile-menu a{color:var(--muted);text-decoration:none;font-size:1rem;padding:0.5rem 0;border-bottom:1px solid var(--border);transition:color 0.2s}
+.mobile-menu a:hover{color:var(--accent)}
+.mobile-menu.open{display:flex}
+
+.hero{min-height:100vh;display:flex;align-items:center;padding:100px 2rem 60px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 70% 50%, rgba(0,212,161,0.07) 0%, transparent 70%);pointer-events:none}
+.grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(0,212,161,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,161,0.04) 1px,transparent 1px);background-size:60px 60px;pointer-events:none}
+.hero-inner{max-width:1100px;margin:auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;position:relative;z-index:1}
+.badge{display:inline-flex;align-items:center;gap:0.5rem;background:rgba(0,212,161,0.1);border:1px solid rgba(0,212,161,0.3);color:var(--accent);font-size:0.75rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;padding:0.4rem 1rem;border-radius:100px;margin-bottom:1.5rem}
+.badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
+h1{font-size:clamp(2rem,4vw,3.2rem);font-weight:700;line-height:1.15;margin-bottom:1.25rem;color:#fff}
+h1 em{font-style:normal;color:var(--accent)}
+.hero-sub{font-size:1.05rem;color:var(--muted);max-width:480px;margin-bottom:2rem;line-height:1.8}
+.hero-ctas{display:flex;gap:1rem;flex-wrap:wrap}
+.btn-primary{background:var(--accent);color:var(--navy);padding:0.875rem 2rem;border-radius:4px;font-weight:700;font-size:0.95rem;text-decoration:none;transition:all 0.2s;letter-spacing:0.02em}
+.btn-primary:hover{background:var(--accent2);transform:translateY(-1px)}
+.btn-ghost{border:1px solid rgba(0,212,161,0.4);color:var(--accent);padding:0.875rem 2rem;border-radius:4px;font-weight:600;font-size:0.95rem;text-decoration:none;transition:all 0.2s}
+.btn-ghost:hover{background:rgba(0,212,161,0.08);transform:translateY(-1px)}
+.hero-visual{display:flex;justify-content:center;align-items:center}
+
+/* ── ANIMATED TERMINAL ── */
+.aterm{position:relative;width:100%;max-width:460px;font-family:'IBM Plex Mono',monospace;border-radius:10px;overflow:hidden;
+  box-shadow:0 0 0 1px rgba(0,212,161,0.2),0 0 40px rgba(0,212,161,0.06),0 24px 60px rgba(0,0,0,0.5);
+  transition:box-shadow 0.4s}
+.aterm.alert-state{box-shadow:0 0 0 1px rgba(255,95,87,0.6),0 0 40px rgba(255,95,87,0.15),0 24px 60px rgba(0,0,0,0.5)}
+.aterm-bar{background:#0d1b2e;padding:0.7rem 1rem;display:flex;align-items:center;gap:0.5rem;border-bottom:1px solid rgba(0,212,161,0.1)}
+.aterm-dot{width:10px;height:10px;border-radius:50%}
+.aterm-dot.r{background:#ff5f57}.aterm-dot.y{background:#febc2e}.aterm-dot.g{background:#28c840}
+.aterm-ttl{font-size:0.68rem;color:rgba(143,163,191,0.6);margin:0 auto;letter-spacing:0.06em}
+.aterm-body{background:#0a1628;padding:1.2rem 1.25rem;min-height:280px;position:relative;overflow:hidden}
+
+/* scanline CRT overlay */
+.aterm-body::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.04) 2px,rgba(0,0,0,0.04) 4px);pointer-events:none;z-index:3}
+/* moving scanline */
+.scanline{position:absolute;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(0,212,161,0.12),transparent);z-index:4;pointer-events:none;animation:scanMove 3s linear infinite;opacity:0.6}
+@keyframes scanMove{0%{top:-2px}100%{top:100%}}
+
+/* alert flash overlay */
+.aterm-flash{position:absolute;inset:0;background:rgba(255,95,87,0);z-index:5;pointer-events:none;transition:background 0.1s}
+.aterm-flash.on{background:rgba(255,95,87,0.08)}
+
+.aterm-log{position:relative;z-index:2;font-size:0.76rem;line-height:1.9}
+.al{display:flex;gap:0.5rem;opacity:0;transform:translateY(3px);transition:opacity 0.25s,transform 0.25s}
+.al.show{opacity:1;transform:translateY(0)}
+.al-prompt{color:#00d4a1;flex-shrink:0}
+.al-cmd{color:#e8f0fe}
+.al-ok{color:#28c864;padding-left:1rem}
+.al-warn{color:#febc2e;padding-left:1rem}
+.al-err{color:#ff5f57;padding-left:1rem}
+.al-info{color:rgba(143,163,191,0.8);padding-left:1rem;font-size:0.72rem}
+.al-acc{color:#00d4a1;padding-left:1rem}
+.al-gap{height:0.35rem}
+
+/* typing cursor */
+.cursor{display:inline-block;width:7px;height:12px;background:#00d4a1;margin-left:2px;vertical-align:middle;animation:blink 0.9s step-end infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+
+/* progress bar inside terminal */
+.al-bar-wrap{padding-left:1rem;display:flex;align-items:center;gap:0.6rem;opacity:0;transform:translateY(3px);transition:opacity 0.25s,transform 0.25s}
+.al-bar-wrap.show{opacity:1;transform:translateY(0)}
+.al-bar-bg{flex:1;height:4px;background:rgba(255,255,255,0.06);border-radius:2px;overflow:hidden}
+.al-bar-fill{height:100%;border-radius:2px;background:#00d4a1;width:0%;transition:width 1.2s ease}
+.al-bar-fill.warn{background:#febc2e}
+.al-bar-fill.err{background:#ff5f57}
+.al-bar-pct{font-size:0.7rem;color:rgba(143,163,191,0.7);min-width:28px}
+
+/* ALERT banner */
+.aterm-alert{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;z-index:10;opacity:0;pointer-events:none;transition:opacity 0.2s}
+.aterm-alert.show{opacity:1}
+.aterm-alert-box{background:rgba(255,95,87,0.12);border:1px solid rgba(255,95,87,0.5);border-radius:6px;padding:0.6rem 1.2rem;text-align:center;animation:alertPulse 0.8s ease 3}
+@keyframes alertPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.04)}}
+.aterm-alert-box span{font-size:0.85rem;font-weight:700;color:#ff5f57;letter-spacing:0.06em}
+.aterm-alert-box small{display:block;font-size:0.65rem;color:rgba(255,95,87,0.7);margin-top:2px}
+
+/* final glow on complete */
+.aterm.done{box-shadow:0 0 0 1px rgba(0,212,161,0.4),0 0 50px rgba(0,212,161,0.1),0 24px 60px rgba(0,0,0,0.5)}
+
+section{padding:90px 2rem}
+.section-inner{max-width:1100px;margin:auto}
+.section-label{font-family:'IBM Plex Mono',monospace;font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);margin-bottom:0.75rem}
+.section-title{font-size:clamp(1.75rem,3vw,2.5rem);font-weight:700;color:#fff;margin-bottom:1rem}
+.section-sub{font-size:1rem;color:var(--muted);max-width:580px;line-height:1.8}
+.divider{width:40px;height:3px;background:var(--accent);margin:1.5rem 0}
+
+#checkup{background:var(--navy2)}
+.check-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;margin-top:2.5rem}
+.check-card{background:var(--navy3);border:1px solid var(--border);border-radius:8px;padding:1.5rem;transition:border-color 0.2s,transform 0.2s}
+.check-card:hover{border-color:rgba(0,212,161,0.4);transform:translateY(-2px)}
+.check-icon{width:42px;height:42px;border-radius:6px;background:rgba(0,212,161,0.1);display:flex;align-items:center;justify-content:center;margin-bottom:1rem;font-size:1.2rem}
+.check-card h3{font-size:0.95rem;font-weight:600;color:#fff;margin-bottom:0.4rem}
+.check-card p{font-size:0.85rem;color:var(--muted);line-height:1.6}
+.risk-bar{height:3px;border-radius:2px;margin-top:1rem;background:rgba(255,255,255,0.08)}
+.risk-fill{height:100%;border-radius:2px}
+.risk-high .risk-fill{background:#ff5f57;width:90%}
+.risk-med .risk-fill{background:#febc2e;width:60%}
+.risk-label{font-size:0.7rem;color:var(--muted);margin-top:0.4rem;font-family:'IBM Plex Mono',monospace}
+
+.service-wrap{display:grid;grid-template-columns:1fr 1.2fr;gap:3rem;align-items:start;margin-top:2.5rem}
+.service-card{background:linear-gradient(135deg,var(--navy2),var(--navy3));border:1px solid rgba(0,212,161,0.35);border-radius:12px;padding:2.5rem;position:relative;overflow:hidden}
+.service-card::before{content:'CONSIGLIATO';position:absolute;top:16px;right:-30px;background:var(--accent);color:var(--navy);font-size:0.65rem;font-weight:700;letter-spacing:0.1em;padding:4px 40px;transform:rotate(35deg);transform-origin:center}
+.service-price{font-size:3rem;font-weight:700;color:var(--accent);line-height:1;margin:1rem 0 0.25rem}
+.service-price-note{font-size:0.8rem;color:var(--muted);margin-bottom:1.5rem;font-family:'IBM Plex Mono',monospace}
+.service-name{font-size:1.3rem;font-weight:700;color:#fff;margin-bottom:0.5rem}
+.service-desc{font-size:0.9rem;color:var(--muted);margin-bottom:1.75rem;line-height:1.7}
+.feature-list{list-style:none;display:flex;flex-direction:column;gap:0.75rem;margin-bottom:2rem}
+.feature-list li{display:flex;align-items:flex-start;gap:0.75rem;font-size:0.9rem;color:var(--text)}
+.feature-list li::before{content:'✓';color:var(--accent);font-weight:700;min-width:16px;margin-top:2px}
+.service-cta{display:block;text-align:center;background:var(--accent);color:var(--navy);padding:0.875rem;border-radius:6px;font-weight:700;text-decoration:none;transition:background 0.2s;font-size:0.95rem}
+.service-cta:hover{background:var(--accent2)}
+.service-info{display:flex;flex-direction:column;gap:1.5rem;padding-top:1rem}
+.info-item{display:flex;gap:1rem;align-items:flex-start}
+.info-num{font-family:'IBM Plex Mono',monospace;font-size:1.5rem;font-weight:500;color:var(--accent);min-width:2.5rem;line-height:1}
+.info-text h4{font-size:0.95rem;font-weight:600;color:#fff;margin-bottom:0.25rem}
+.info-text p{font-size:0.85rem;color:var(--muted);line-height:1.6}
+.guarantee{background:rgba(0,212,161,0.06);border:1px solid rgba(0,212,161,0.2);border-radius:8px;padding:1.25rem;margin-top:1rem}
+.guarantee p{font-size:0.85rem;color:var(--muted);line-height:1.6}
+.guarantee strong{color:var(--text)}
+
+#about{background:var(--navy2)}
+.about-wrap{display:grid;grid-template-columns:1fr 1.5fr;gap:4rem;align-items:start;margin-top:2.5rem}
+.photo-frame{width:100%;aspect-ratio:3/4;border-radius:8px;background:var(--navy3);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.photo-placeholder{display:flex;flex-direction:column;align-items:center;gap:1rem;color:var(--muted);font-size:0.8rem;text-align:center;padding:2rem}
+.avatar-big{width:80px;height:80px;border-radius:50%;background:rgba(0,212,161,0.15);border:2px solid rgba(0,212,161,0.4);display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700;color:var(--accent)}
+.photo-note{font-size:0.72rem;color:var(--muted);font-family:'IBM Plex Mono',monospace;margin-top:0.5rem}
+.stat-boxes{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-top:1rem}
+.stat-box{background:var(--navy3);border:1px solid var(--border);border-radius:6px;padding:1rem;text-align:center}
+.stat-box strong{display:block;font-size:1.5rem;font-weight:700;color:var(--accent)}
+.stat-box span{font-size:0.75rem;color:var(--muted)}
+.about-text h3{font-size:1.5rem;font-weight:700;color:#fff;margin-bottom:0.5rem}
+.about-text .subtitle{font-family:'IBM Plex Mono',monospace;font-size:0.75rem;color:var(--accent);letter-spacing:0.08em;margin-bottom:1.5rem}
+.about-text p{font-size:0.9rem;color:var(--muted);line-height:1.8;margin-bottom:1rem}
+.skills-grid{display:flex;flex-wrap:wrap;gap:0.5rem;margin:1.25rem 0}
+.skill-tag{background:rgba(0,212,161,0.08);border:1px solid rgba(0,212,161,0.2);color:var(--accent);font-size:0.75rem;padding:0.35rem 0.75rem;border-radius:100px;font-family:'IBM Plex Mono',monospace}
+.authority-box{background:var(--navy3);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;padding:1.25rem 1.5rem;margin-top:1rem}
+.authority-box p{font-size:0.85rem;color:var(--text);line-height:1.7;font-style:italic}
+
+.contact-wrap{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;margin-top:2.5rem}
+.contact-cards{display:flex;flex-direction:column;gap:1rem}
+.contact-card{background:var(--navy2);border:1px solid var(--border);border-radius:8px;padding:1.5rem;display:flex;align-items:center;gap:1.25rem;text-decoration:none;transition:all 0.2s}
+.contact-card:hover{border-color:rgba(0,212,161,0.5);transform:translateX(4px);background:var(--navy3)}
+.contact-icon{width:48px;height:48px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
+.ci-wa{background:rgba(37,211,102,0.12);color:#25d366}
+.ci-li{background:rgba(0,119,181,0.15);color:#0077b5;font-weight:700;font-size:1rem}
+.ci-mail{background:rgba(0,212,161,0.1);color:var(--accent)}
+.contact-card h4{font-size:0.9rem;font-weight:600;color:#fff;margin-bottom:0.2rem}
+.contact-card p{font-size:0.8rem;color:var(--muted)}
+.contact-card .arrow{margin-left:auto;color:var(--muted);font-size:0.9rem;transition:color 0.2s}
+.contact-card:hover .arrow{color:var(--accent)}
+.contact-message{background:var(--navy2);border:1px solid var(--border);border-radius:12px;padding:2rem}
+.contact-message h3{font-size:1.1rem;font-weight:600;color:#fff;margin-bottom:0.75rem}
+.contact-message p{font-size:0.875rem;color:var(--muted);line-height:1.8;margin-bottom:1.5rem}
+.cta-list{list-style:none;display:flex;flex-direction:column;gap:0.6rem}
+.cta-list li{font-size:0.85rem;color:var(--text);display:flex;align-items:center;gap:0.6rem}
+.cta-list li::before{content:'→';color:var(--accent);font-weight:600}
+
+footer{background:rgba(0,0,0,0.3);border-top:1px solid var(--border);padding:2rem;text-align:center}
+footer p{font-size:0.8rem;color:var(--muted)}
+footer a{color:var(--accent);text-decoration:none}
+
+@media(max-width:900px){
+.hero-inner,.service-wrap,.about-wrap,.contact-wrap{grid-template-columns:1fr;gap:2rem}
+.hero-visual{order:1}
+.aterm{max-width:100%}
+.service-card::before{display:none}
+.stat-boxes{grid-template-columns:repeat(4,1fr)}
+}
+@media(max-width:640px){
+.nav-links,.nav-cta{display:none}
+.hamburger{display:flex}
+.hero{padding-top:80px}
+section{padding:70px 1.5rem}
+.stat-boxes{grid-template-columns:1fr 1fr}
+.section-title{font-size:1.6rem}
+.service-price{font-size:2.2rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+<div class="nav-inner">
+<a href="#home" class="logo">Jacopo Zito<span> cybersecurity expert</span></a>
+<ul class="nav-links">
+<li><a href="#home">Home</a></li>
+<li><a href="#checkup">Check-up</a></li>
+<li><a href="#services">Servizi</a></li>
+<li><a href="#about">Chi sono</a></li>
+<li><a href="#contact">Contatti</a></li>
+</ul>
+<a href="#contact" class="nav-cta">Richiedi audit</a>
+<div class="hamburger" onclick="toggleMenu()" id="ham">
+<span></span><span></span><span></span>
+</div>
+</div>
+</nav>
+
+<div class="mobile-menu" id="mobile-menu">
+<a href="#home" onclick="closeMenu()">Home</a>
+<a href="#checkup" onclick="closeMenu()">Check-up rapido</a>
+<a href="#services" onclick="closeMenu()">Servizi &amp; Prezzi</a>
+<a href="#about" onclick="closeMenu()">Chi sono</a>
+<a href="#contact" onclick="closeMenu()">Contatti</a>
+</div>
+
+<section id="home" class="hero">
+<div class="grid-bg"></div>
+<div class="hero-inner">
+<div>
+<div class="badge">🔒 Sicurezza informatica per PMI · Roma</div>
+
+<!-- ════════════════════════════════════════════
+     OPZIONI TESTO HERO — scegli una e cancella le altre
+     ════════════════════════════════════════════
+
+  OPZIONE A — diretta, impatto immediato:
+  <h1>La tua rete<br>è già<br><em>sotto attacco.</em></h1>
+  <p class="hero-sub">Scoprirlo dopo costa dieci volte di più. Faccio audit di sicurezza informatica per studi professionali e PMI a Roma — e consegno il report in 48 ore.</p>
+
+  OPZIONE B — autorevole, orientata al rischio reale:
+  <h1>I tuoi clienti<br>si fidano<br><em>dei tuoi dati.</em></h1>
+  <p class="hero-sub">Una rete non protetta, email falsificabili, backup che non funzionano: sono rischi silenziosi. Li individuo, li documento, li risolvo — prezzo fisso, zero tecnicismi.</p>
+
+  OPZIONE C — urgenza + soluzione (quella attuale migliorata):
+  <h1>I tuoi dati<br>sono esposti.<br><em>Lo sai già?</em></h1>
+  <p class="hero-sub">Verifico reti, credenziali, email e conformità GDPR per studi professionali a Roma. Report scritto in 48 ore su cosa rischi — e con tutto già corretto.</p>
+     ════════════════════════════════════════════ -->
+
+<h1>I tuoi dati<br>sono esposti.<br><em>Lo sai già?</em></h1>
+<p class="hero-sub">Verifico reti, credenziali, email e conformità GDPR per studi professionali a Roma. Report scritto in 48 ore su cosa rischi — e con tutto già corretto.</p>
+<div class="hero-ctas">
+<a href="#checkup" class="btn-primary">Check-up gratuito</a>
+<a href="#services" class="btn-ghost">Scopri l'audit →</a>
+</div>
+</div>
+<div class="hero-visual">
+
+<!-- ANIMATED TERMINAL -->
+<div class="aterm" id="aterm">
+<div class="aterm-bar">
+<div class="aterm-dot r"></div><div class="aterm-dot y"></div><div class="aterm-dot g"></div>
+<span class="aterm-ttl">jacopo_audit_v2.sh — bash</span>
+</div>
+<div class="aterm-body" id="aterm-body">
+<div class="scanline"></div>
+<div class="aterm-flash" id="aterm-flash"></div>
+<div class="aterm-alert" id="aterm-alert">
+<div class="aterm-alert-box">
+<span>⚠ VULNERABILITÀ CRITICHE</span>
+<small>5 problemi rilevati · intervento necessario</small>
+</div>
+</div>
+<div class="aterm-log" id="aterm-log"></div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</section>
+
+<script>
+(function(){
+var log=document.getElementById('aterm-log');
+var term=document.getElementById('aterm');
+var flash=document.getElementById('aterm-flash');
+var alertBox=document.getElementById('aterm-alert');
+
+var seq=[
+{t:'cmd',text:'avvio_audit --target rete_locale',delay:400},
+{t:'bar',cls:'',label:'scansione in corso',pct:100,duration:1100,delay:120},
+{t:'out',cls:'al-ok',text:'✓ host attivi: 9 · porte analizzate: 4096',delay:200},
+{t:'out',cls:'al-warn',text:'⚠ 3 dispositivi: firmware obsoleto',delay:180},
+{t:'out',cls:'al-err',text:'✗ 1 porta esposta senza autenticazione',delay:160},
+{t:'gap',delay:120},
+{t:'cmd',text:'check_email --domain studio.it',delay:500},
+{t:'bar',cls:'err',label:'analisi record DNS',pct:100,duration:900,delay:100},
+{t:'out',cls:'al-err',text:'✗ SPF: non configurato',delay:160,flash:true},
+{t:'out',cls:'al-err',text:'✗ DKIM: assente',delay:140,flash:true},
+{t:'out',cls:'al-err',text:'✗ DMARC: assente — email falsificabili',delay:140,flash:true},
+{t:'gap',delay:100},
+{t:'cmd',text:'scan_credenziali --darkweb',delay:500},
+{t:'bar',cls:'warn',label:'ricerca database violazioni',pct:100,duration:1300,delay:100},
+{t:'out',cls:'al-warn',text:'⚠ 2 password trovate in data breach',delay:200},
+{t:'out',cls:'al-info',text:'  fonte: raccolta 2023 · 8.4M record',delay:140},
+{t:'gap',delay:100},
+{t:'cmd',text:'verifica_backup --offline --cloud',delay:500},
+{t:'bar',cls:'warn',label:'verifica integrità',pct:65,duration:900,delay:100},
+{t:'out',cls:'al-warn',text:'⚠ ultimo backup verificato: 54 giorni fa',delay:180},
+{t:'out',cls:'al-err',text:'✗ ripristino cloud: timeout — non testabile',delay:160},
+{t:'gap',delay:100},
+{t:'cmd',text:'audit_gdpr --trattamenti',delay:500},
+{t:'bar',cls:'err',label:'analisi conformità',pct:100,duration:800,delay:100},
+{t:'out',cls:'al-err',text:'✗ registro trattamenti: non trovato',delay:160,flash:true},
+{t:'out',cls:'al-err',text:'✗ procedura violazione: non definita',delay:140,flash:true},
+{t:'gap',delay:200},
+{t:'alert',delay:0},
+{t:'gap',delay:1600},
+{t:'cmd',text:'genera_report --pdf --priorita',delay:300},
+{t:'bar',cls:'',label:'compilazione report',pct:100,duration:1000,delay:100},
+{t:'out',cls:'al-ok',text:'✓ report_audit_'+new Date().toISOString().slice(0,10)+'.pdf',delay:200},
+{t:'out',cls:'al-acc',text:'→ 5 criticità · piano di remediation incluso',delay:160},
+{t:'out',cls:'al-acc',text:'→ consegna entro 48h · prezzo fisso €499,99',delay:160},
+{t:'done',delay:300}
+];
+
+var idx=0;
+var timer=null;
+
+function makeEl(cls,txt){
+var d=document.createElement('div');
+d.className='al '+cls;
+d.innerHTML=txt;
+return d;
+}
+function makeBarEl(cls,label){
+var d=document.createElement('div');
+d.className='al-bar-wrap';
+d.innerHTML='<span style="color:rgba(143,163,191,0.6);font-size:0.72rem;min-width:0">'+label+'</span><div class="al-bar-bg"><div class="al-bar-fill'+( cls?' '+cls:'')+'" id="bfill_'+idx+'"></div></div><span class="al-bar-pct" id="bpct_'+idx+'">0%</span>';
+return d;
+}
+function flashFn(){
+flash.classList.add('on');
+term.classList.add('alert-state');
+setTimeout(function(){flash.classList.remove('on');},120);
+setTimeout(function(){term.classList.remove('alert-state');},600);
+}
+function showAlert(){
+alertBox.classList.add('show');
+term.classList.add('alert-state');
+setTimeout(function(){alertBox.classList.remove('show');term.classList.remove('alert-state');},1500);
+}
+
+function typeCmd(el,text,cb){
+var i=0;
+var inner='<span class="al-prompt">$</span><span class="al-cmd"> ';
+el.innerHTML=inner+'<span class="cursor"></span></span>';
+el.classList.add('show');
+var iv=setInterval(function(){
+if(i<text.length){
+el.innerHTML=inner+text.slice(0,++i)+'<span class="cursor"></span></span>';
+}else{
+el.innerHTML=inner+text+'</span>';
+clearInterval(iv);
+if(cb)cb();
+}
+},30);
+}
+
+function runBar(el,cls,pct,duration,cb){
+el.classList.add('show');
+var fill=el.querySelector('.al-bar-fill');
+var lbl=el.querySelector('.al-bar-pct');
+var start=null;
+function step(ts){
+if(!start)start=ts;
+var prog=Math.min((ts-start)/duration,1);
+var cur=Math.round(prog*pct);
+fill.style.width=cur+'%';
+lbl.textContent=cur+'%';
+if(prog<1){requestAnimationFrame(step);}
+else{if(cb)setTimeout(cb,80);}
+}
+requestAnimationFrame(step);
+}
+
+function next(){
+if(idx>=seq.length)return;
+var s=seq[idx];
+idx++;
+timer=setTimeout(function(){
+if(s.t==='cmd'){
+var el=makeEl('','');
+log.appendChild(el);
+typeCmd(el,s.text,function(){scrollBottom();next();});
+}else if(s.t==='out'){
+var el=makeEl(s.cls,s.text);
+log.appendChild(el);
+requestAnimationFrame(function(){el.classList.add('show');});
+if(s.flash)flashFn();
+scrollBottom();
+next();
+}else if(s.t==='bar'){
+var el=makeBarEl(s.cls,s.label);
+log.appendChild(el);
+requestAnimationFrame(function(){el.classList.add('show');});
+runBar(el,s.cls,s.pct,s.duration,function(){scrollBottom();next();});
+}else if(s.t==='gap'){
+var el=document.createElement('div');
+el.className='al-gap';
+log.appendChild(el);
+next();
+}else if(s.t==='alert'){
+showAlert();next();
+}else if(s.t==='done'){
+term.classList.add('done');
+setTimeout(function(){restart();},5000);
+}
+},s.delay||0);
+}
+
+function scrollBottom(){
+var b=document.getElementById('aterm-body');
+b.scrollTop=b.scrollHeight;
+}
+
+function restart(){
+log.innerHTML='';
+term.classList.remove('done','alert-state');
+idx=0;
+next();
+}
+
+next();
+})();
+</script>
+
+<section id="checkup">
+<div class="section-inner">
+<div class="section-label">// check-up rapido</div>
+<h2 class="section-title">Quanto è sicura<br>la tua attività?</h2>
+<p class="section-sub">8 domande, 2 minuti. Ottieni un'analisi del tuo profilo di rischio reale — gratuita e senza impegno.</p>
+<div class="divider"></div>
+
+<div id="cq-container" style="margin-top:2rem">
+
+<div class="cq-prog-bar" style="background:rgba(255,255,255,0.06);border-radius:4px;height:4px;margin-bottom:0.4rem;overflow:hidden"><div id="cq-pbar" style="height:100%;background:var(--accent);border-radius:4px;width:0%;transition:width 0.5s ease"></div></div>
+<div style="font-size:0.72rem;color:var(--muted);font-family:'IBM Plex Mono',monospace;display:flex;justify-content:space-between;margin-bottom:1.5rem"><span id="cq-plabel">0 di 8 domande</span><span id="cq-pct">0%</span></div>
+
+<div id="cq-questions"></div>
+
+<div id="cq-submit" style="display:none;margin-top:0.5rem">
+<button onclick="cqShowResult()" style="width:100%;background:var(--accent);color:#0a1628;border:none;padding:0.875rem 2rem;border-radius:6px;font-weight:700;font-size:0.95rem;cursor:pointer;font-family:'Sora',sans-serif">Analizza i miei rischi →</button>
+</div>
+
+<div id="cq-result" style="display:none"></div>
+
+</div>
+</div>
+</section>
+
+<style>
+.cq-qcard{background:#112240;border:1px solid rgba(0,212,161,0.13);border-radius:10px;padding:1.5rem;margin-bottom:1rem;transition:border-color 0.2s}
+.cq-qcard.answered{border-color:rgba(0,212,161,0.32)}
+.cq-qnum{font-size:0.68rem;color:var(--accent);font-family:'IBM Plex Mono',monospace;letter-spacing:0.1em;margin-bottom:0.4rem}
+.cq-rtag{display:inline-block;font-size:0.65rem;letter-spacing:0.08em;text-transform:uppercase;padding:2px 8px;border-radius:100px;font-family:'IBM Plex Mono',monospace;margin-bottom:0.7rem;font-weight:600;border:1px solid}
+.cq-rh{background:rgba(255,95,87,0.1);color:#ff5f57;border-color:rgba(255,95,87,0.25)}
+.cq-rm{background:rgba(254,188,46,0.1);color:#febc2e;border-color:rgba(254,188,46,0.25)}
+.cq-qtext{font-size:0.95rem;font-weight:600;color:#fff;margin-bottom:0.3rem;line-height:1.5}
+.cq-why{font-size:0.8rem;color:var(--muted);line-height:1.6;margin-bottom:1rem}
+.cq-opts{display:flex;gap:0.6rem;flex-wrap:wrap}
+.cq-btn{padding:0.5rem 1.1rem;border-radius:6px;font-size:0.82rem;font-weight:600;cursor:pointer;border:1px solid;transition:all 0.18s;font-family:'Sora',sans-serif;background:transparent}
+.cq-si{border-color:rgba(40,200,100,0.3);color:#28c864}
+.cq-si:hover,.cq-si.sel{background:rgba(40,200,100,0.15);border-color:#28c864}
+.cq-no{border-color:rgba(255,95,87,0.3);color:#ff5f57}
+.cq-no:hover,.cq-no.sel{background:rgba(255,95,87,0.15);border-color:#ff5f57}
+.cq-ns{border-color:rgba(254,188,46,0.3);color:#febc2e}
+.cq-ns:hover,.cq-ns.sel{background:rgba(254,188,46,0.15);border-color:#febc2e}
+.cq-issue{background:#112240;border-radius:8px;padding:1rem 1.25rem;margin-bottom:0.75rem}
+.cq-issue.ih{border-left:3px solid #ff5f57}
+.cq-issue.im{border-left:3px solid #febc2e}
+.cq-issue.iok{border-left:3px solid #28c864}
+.cq-iname{font-size:0.875rem;font-weight:600;color:#fff;margin-bottom:0.25rem}
+.cq-idesc{font-size:0.8rem;color:var(--muted);line-height:1.6}
+.cq-ifix{font-size:0.78rem;color:var(--accent);margin-top:0.4rem;line-height:1.5}
+.cq-circle{width:110px;height:110px;border-radius:50%;margin:0 auto 1.25rem;display:flex;flex-direction:column;align-items:center;justify-content:center;border:3px solid}
+.cq-cta-box{background:rgba(0,212,161,0.06);border:1px solid rgba(0,212,161,0.25);border-radius:10px;padding:1.25rem;text-align:center;margin-top:1.25rem}
+.cq-cta-box p{font-size:0.875rem;color:var(--muted);margin-bottom:1rem;line-height:1.7}
+.cq-cta-box a{display:inline-block;background:var(--accent);color:#0a1628;padding:0.75rem 2rem;border-radius:6px;font-weight:700;font-size:0.875rem;text-decoration:none;transition:background 0.2s}
+.cq-cta-box a:hover{background:var(--accent2)}
+</style>
+
+<script>
+var cqData=[
+{id:'wifi',risk:'high',icon:'📶',
+ title:'La rete WiFi è condivisa tra staff e clienti/pazienti?',
+ why:'Una rete unica permette a chiunque si connetta come ospite di vedere i dispositivi interni: computer, stampanti, gestionale. Bastano app gratuite per spiare il traffico di rete.',
+ bad:'WiFi condiviso — rete interna esposta',
+ fix:'Configurare una rete ospite separata (Guest Network) — operazione da 10 minuti sul pannello del router, inclusa nell\'audit.'
+},
+{id:'backup',risk:'high',icon:'💾',
+ title:'Hai un backup recente verificato, sia offline che su cloud?',
+ why:'Ransomware, guasto hardware, furto: senza backup verificato perdi anni di dati in un attimo. Il 60% degli studi ha backup automatici che non funzionano — e lo scopre solo dopo.',
+ bad:'Nessun backup verificato',
+ fix:'Metodo 3-2-1: 3 copie, 2 supporti diversi, 1 fuori sede. Verifico che i backup esistano davvero e che siano effettivamente ripristinabili.'
+},
+{id:'email',risk:'high',icon:'📧',
+ title:'Sai se chiunque può inviare email spacciandosi per te?',
+ why:'Senza record SPF, DKIM e DMARC configurati, qualsiasi malintenzionato può mandare email "da te" ai tuoi clienti. Truffe, phishing, danni di immagine immediati — e tu non lo vedi.',
+ bad:'Email del dominio falsificabile',
+ fix:'Tre record DNS da configurare una volta sola — nessun costo, protezione immediata. Incluso nell\'audit.'
+},
+{id:'darkweb',risk:'high',icon:'🕵️',
+ title:'Hai mai verificato se le tue password sono già state rubate?',
+ why:'Miliardi di credenziali circolano nel dark web dopo data breach di anni fa. Se usi la stessa password su più servizi, è probabile che qualcuno abbia già accesso a qualcosa — silenziosamente.',
+ bad:'Credenziali potenzialmente esposte nel dark web',
+ fix:'Scansione con strumenti professionali + cambio immediato delle credenziali esposte + impostazione password manager per il team.'
+},
+{id:'update',risk:'med',icon:'🖥️',
+ title:'Tutti i computer e il software gestionale sono aggiornati?',
+ why:'I sistemi non aggiornati hanno vulnerabilità note da mesi. Gli attacchi automatizzati le sfruttano senza bisogno di prendere di mira specificamente te — scansionano migliaia di IP al giorno.',
+ bad:'Software con vulnerabilità note',
+ fix:'Audit completo dello stato di aggiornamento di tutti i dispositivi + piano di manutenzione periodica.'
+},
+{id:'firewall',risk:'med',icon:'🛡️',
+ title:'Il router/firewall è stato configurato da un tecnico, non lasciato "di default"?',
+ why:'La maggior parte dei router viene installata con impostazioni di fabbrica: password admin "admin", porte aperte inutilmente, nessun log. È la porta d\'ingresso principale della tua rete.',
+ bad:'Firewall con configurazione di fabbrica',
+ fix:'Hardening del router: cambio credenziali admin, chiusura porte inutili, abilitazione log di accesso — operazione inclusa nell\'audit.'
+},
+{id:'gdpr',risk:'high',icon:'⚖️',
+ title:'Tratti dati di clienti/pazienti e hai verificato la conformità GDPR?',
+ why:'Studi medici, legali, commercialisti: trattate dati sensibili ogni giorno. Una violazione non segnalata entro 72 ore porta a sanzioni che partono da €10.000 per le PMI.',
+ bad:'Esposizione a sanzioni GDPR',
+ fix:'Verifica registro dei trattamenti, consensi, misure di sicurezza adottate e procedure operative in caso di violazione dei dati.'
+},
+{id:'access',risk:'med',icon:'🔑',
+ title:'Ogni collaboratore ha le proprie credenziali personali separate?',
+ why:'Credenziali condivise tra colleghi rendono impossibile sapere chi ha fatto cosa — violazione GDPR diretta. Se un collaboratore lascia l\'azienda, l\'accesso rimane aperto finché qualcuno non se ne accorge.',
+ bad:'Accessi condivisi o non tracciati',
+ fix:'Audit account attivi, rimozione accessi non necessari, creazione credenziali personali per ogni utente.'
+}
+];
+
+var cqAns={};
+
+function cqRender(){
+var html='';
+cqData.forEach(function(q,i){
+var a=cqAns[q.id];
+var rtClass=q.risk==='high'?'cq-rh':'cq-rm';
+var rtLabel=q.risk==='high'?'Rischio alto':'Rischio medio';
+html+='<div class="cq-qcard'+(a?' answered':'')+'" id="cq_'+q.id+'">';
+html+='<div class="cq-qnum">DOMANDA '+(i+1)+' / '+cqData.length+'</div>';
+html+='<span class="cq-rtag '+rtClass+'">'+rtLabel+'</span>';
+html+='<div class="cq-qtext">'+q.icon+' '+q.title+'</div>';
+html+='<div class="cq-why">'+q.why+'</div>';
+html+='<div class="cq-opts">';
+html+='<button class="cq-btn cq-si'+(a==='si'?' sel':'')+'" onclick="cqAnswer(\''+q.id+'\',\'si\')">✓ Sì, è a posto</button>';
+html+='<button class="cq-btn cq-no'+(a==='no'?' sel':'')+'" onclick="cqAnswer(\''+q.id+'\',\'no\')">✗ No / Non l\'ho fatto</button>';
+html+='<button class="cq-btn cq-ns'+(a==='ns'?' sel':'')+'" onclick="cqAnswer(\''+q.id+'\',\'ns\')">? Non sono sicuro</button>';
+html+='</div></div>';
+});
+document.getElementById('cq-questions').innerHTML=html;
+cqUpdateProgress();
+}
+
+function cqAnswer(id,val){
+cqAns[id]=val;
+cqRender();
+if(Object.keys(cqAns).length===cqData.length){
+document.getElementById('cq-submit').style.display='block';
+}
+}
+
+function cqUpdateProgress(){
+var n=Object.keys(cqAns).length;
+var pct=Math.round((n/cqData.length)*100);
+document.getElementById('cq-pbar').style.width=pct+'%';
+document.getElementById('cq-plabel').textContent=n+' di '+cqData.length+' domande';
+document.getElementById('cq-pct').textContent=pct+'%';
+}
+
+function cqShowResult(){
+var issues=[];
+var okCount=0;
+cqData.forEach(function(q){
+var a=cqAns[q.id];
+if(a==='no'||a==='ns'){issues.push({q:q,ans:a});}
+else{okCount++;}
+});
+var score=Math.round((okCount/cqData.length)*100);
+var sc,sl,sm;
+if(score>=80){sc='#28c864';sl='Buono';sm='La tua struttura ha una base di sicurezza discreta. Restano margini di miglioramento — nessuna struttura è perfetta al primo check.';}
+else if(score>=50){sc='#febc2e';sl='A rischio';sm='Hai vulnerabilità significative che espongono i dati tuoi e dei tuoi clienti a rischi concreti.';}
+else{sc='#ff5f57';sl='Critico';sm='La tua attività è seriamente esposta. Un attacco silenzioso o una sanzione GDPR in queste condizioni è solo una questione di tempo.';}
+
+var html='<div style="text-align:center;padding:1rem 0 0.5rem">';
+html+='<div class="cq-circle" style="border-color:'+sc+';background:'+sc+'18">';
+html+='<span style="font-size:2rem;font-weight:700;color:'+sc+';line-height:1">'+score+'%</span>';
+html+='<span style="font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;font-family:monospace;color:'+sc+';margin-top:2px">'+sl+'</span>';
+html+='</div>';
+html+='<div style="font-size:1.15rem;font-weight:700;color:#fff;margin-bottom:0.3rem">'+sl+': '+score+'% di protezione attiva</div>';
+html+='<div style="font-size:0.875rem;color:var(--muted);max-width:480px;margin:0 auto 1.5rem;line-height:1.7">'+sm+'</div>';
+html+='</div>';
+
+if(issues.length>0){
+html+='<div style="font-size:0.72rem;color:var(--muted);font-family:monospace;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.75rem">'+issues.length+' CRITICITÀ RILEVATE</div>';
+issues.forEach(function(item){
+var q=item.q;
+var cls=q.risk==='high'?'ih':'im';
+var ns=item.ans==='ns'?' <span style="font-size:0.7rem;color:#febc2e;font-weight:400">(non verificato)</span>':'';
+html+='<div class="cq-issue '+cls+'">';
+html+='<div class="cq-iname">'+q.icon+' '+q.bad+ns+'</div>';
+html+='<div class="cq-idesc">'+q.why+'</div>';
+html+='<div class="cq-ifix">→ '+q.fix+'</div>';
+html+='</div>';
+});
+html+='<div class="cq-cta-box">';
+html+='<p>Vuoi che risolva queste '+issues.length+' criticità? Con l\'Audit + Messa in Sicurezza a <strong style="color:var(--accent)">€499,99 IVA inclusa</strong> le affronto tutte — report consegnato in 48h.</p>';
+html+='<a href="#contact">Richiedi l\'audit ora →</a>';
+html+='</div>';
+}else{
+html+='<div class="cq-cta-box"><p>Ottimo lavoro. Per avere la conferma scritta che tutto sia davvero a posto, puoi richiedere l\'audit formale con report PDF.</p><a href="#contact">Richiedi verifica →</a></div>';
+}
+html+='<div style="text-align:center;margin-top:1rem"><button onclick="cqReset()" style="background:none;border:none;color:var(--muted);font-size:0.78rem;cursor:pointer;font-family:\'Sora\',sans-serif;text-decoration:underline">↺ Rifai il check-up</button></div>';
+
+document.getElementById('cq-result').innerHTML=html;
+document.getElementById('cq-result').style.display='block';
+document.getElementById('cq-questions').style.display='none';
+document.getElementById('cq-submit').style.display='none';
+document.querySelector('.cq-prog-bar').style.display='none';
+document.querySelector('#cq-container>div:nth-child(2)').style.display='none';
+}
+
+function cqReset(){
+cqAns={};
+document.getElementById('cq-questions').style.display='block';
+document.getElementById('cq-result').style.display='none';
+document.querySelector('.cq-prog-bar').style.display='block';
+document.querySelector('#cq-container>div:nth-child(2)').style.display='flex';
+cqRender();
+}
+
+cqRender();
+</script>
+
+<section id="services">
+<div class="section-inner">
+<div class="section-label">// servizi &amp; prezzi</div>
+<h2 class="section-title">Un pacchetto completo,<br>nessuna sorpresa</h2>
+<p class="section-sub">Prezzo fisso, trasparente. Sai esattamente cosa ricevi prima di iniziare.</p>
+<div class="divider"></div>
+<div class="service-wrap">
+<div class="service-card">
+<div class="service-name">Audit + Messa in Sicurezza</div>
+<div class="service-desc">Il pacchetto completo: non solo scopri i problemi — li risolvo io direttamente.</div>
+<div class="service-price">€499,99</div>
+<div class="service-price-note">IVA inclusa · prezzo fisso · nessun extra</div>
+<ul class="feature-list">
+<li>Scansione completa rete interna e dispositivi</li>
+<li>Verifica configurazione email (SPF, DKIM, DMARC)</li>
+<li>Analisi vulnerabilità sito web e accessi esterni</li>
+<li>Verifica conformità GDPR e gestione dati</li>
+<li>Correzione di tutte le vulnerabilità trovate</li>
+<li>Configurazione sicura di rete e dispositivi</li>
+<li>Impostazione email autenticata e protetta</li>
+<li>Report PDF dettagliato con priorità di rischio</li>
+<li>Call di restituzione per spiegare tutto chiaramente</li>
+<li>Consegna entro 48 ore dall'accesso</li>
+</ul>
+<a href="#contact" class="service-cta">Richiedi ora →</a>
+</div>
+<div class="service-info">
+<div class="info-item">
+<div class="info-num">01</div>
+<div class="info-text">
+<h4>Come funziona</h4>
+<p>Mi contatti, fissiamo un appuntamento nel tuo studio. Porto il necessario, lavoro in autonomia — tu continui la tua giornata normalmente.</p>
+</div>
+</div>
+<div class="info-item">
+<div class="info-num">02</div>
+<div class="info-text">
+<h4>Cosa ricevi</h4>
+<p>Un report PDF professionale con ogni criticità spiegata in italiano semplice: cos'è, quanto è grave, come è stato risolto.</p>
+</div>
+</div>
+<div class="info-item">
+<div class="info-num">03</div>
+<div class="info-text">
+<h4>Perché vale €499,99</h4>
+<p>Una sanzione GDPR per una PMI parte da €10.000. Un giorno di blocco operativo costa di più. L'audit è un investimento, non una spesa.</p>
+</div>
+</div>
+<div class="guarantee">
+<p><strong>Massima trasparenza:</strong> se durante l'analisi non trovo vulnerabilità significative, te lo dico subito — senza gonfiare il report per giustificare il prezzo.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="about">
+<div class="section-inner">
+<div class="section-label">// chi sono</div>
+<h2 class="section-title">Una persona reale,<br>non un'azienda anonima</h2>
+<div class="divider"></div>
+<div class="about-wrap">
+<div>
+<div class="photo-frame">
+<div class="photo-placeholder">
+<div class="avatar-big">J</div>
+<p>Jacopo Zito.</p>
+<p class="photo-note">← sostituisci con la tua foto</p>
+</div>
+</div>
+</div>
+<div class="about-text">
+<h3>Jacopo Zito</h3>
+<div class="subtitle">CONSULENTE SICUREZZA INFORMATICA · ROMA</div>
+<p>Ho 20 anni e mi occupo di sicurezza informatica applicata alle piccole e medie imprese romane. Non lavoro per una grande azienda — sono un consulente indipendente, il che significa che hai a che fare direttamente con me, non con un ufficio commerciale.</p>
+<p>Ho un diploma in informatica ad indirizzo tecnico e ho scelto di specializzarmi nel campo della sicurezza informatica perché ho visto di persona quanto le PMI romane siano esposte a rischi che nessuno ha mai spiegato loro in modo chiaro.</p>
+<p>Il mio approccio è semplice: ti dico esattamente cosa ho trovato, quanto è grave, e come lo risolvo — senza tecnicismi inutili, senza allarmismi, senza budget gonfiati.</p>
+<div class="skills-grid">
+<span class="skill-tag">Network scanning</span>
+<span class="skill-tag">Vulnerability assessment</span>
+<span class="skill-tag">GDPR compliance</span>
+<span class="skill-tag">Email security</span>
+<span class="skill-tag">Hardening sistemi</span>
+<span class="skill-tag">Web-Application security</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="contact">
+<div class="section-inner">
+<div class="section-label">// contatti</div>
+<h2 class="section-title">Parliamoci</h2>
+<p class="section-sub">Nessun impegno. Una conversazione per capire se posso esserti utile — tutto qui.</p>
+<div class="divider"></div>
+<div class="contact-wrap">
+<div class="contact-cards">
+<a href="https://wa.me/393246028103" class="contact-card">
+<div class="contact-icon ci-wa">💬</div>
+<div>
+<h4>WhatsApp</h4>
+<p>Rispondo entro poche ore · preferito per messaggi rapidi</p>
+</div>
+<span class="arrow">→</span>
+</a>
+<a href="https://it.linkedin.com/in/jacopo-zito-15b6843b6" class="contact-card" target="_blank">
+<div class="contact-icon ci-li">in</div>
+<div>
+<h4>LinkedIn</h4>
+<p>Profilo professionale · connessioni e referenze</p>
+</div>
+<span class="arrow">→</span>
+</a>
+<a href="mailto:jacopo.zito@proton.me" class="contact-card">
+<div class="contact-icon ci-mail">✉</div>
+<div>
+<h4>Email</h4>
+<p>Per richieste formali · risposta entro 24h</p>
+</div>
+<span class="arrow">→</span>
+</a>
+</div>
+<div class="contact-message">
+<h3>Cosa succede quando mi contatti</h3>
+<p>Niente presentazioni commerciali, niente pressioni. Ti faccio qualche domanda sulla tua attività per capire se e come posso aiutarti.</p>
+<ul class="cta-list">
+<li>Sopralluogo preliminare gratuito per studi a Roma Est</li>
+<li>Risposta garantita entro 24 ore</li>
+<li>Preventivo chiaro prima di iniziare qualsiasi lavoro</li>
+<li>Prezzi fissi: nessuna sorpresa in fattura</li>
+<li>Zone: Roma e provincia.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+
+<footer>
+<p>© 2025 Jacopo Zito. — Consulente Sicurezza Informatica · Roma · <a href="mailto:jacopo.zito@proton.me">jacopo.zito@proton.me</a></p>
+<p style="margin-top:0.5rem;font-size:0.72rem">Prestazione occasionale ex art. 2222 c.c.</p>
+</footer>
+
+<script>
+function toggleMenu(){
+var m=document.getElementById('mobile-menu');
+m.classList.toggle('open');
+}
+function closeMenu(){
+document.getElementById('mobile-menu').classList.remove('open');
+}
+document.querySelectorAll('a[href^="#"]').forEach(function(a){
+a.addEventListener('click',function(e){
+var t=document.querySelector(this.getAttribute('href'));
+if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'});}
+});
+});
+</script>
+</body>
+</html>
