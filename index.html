@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Jacopo Zito — Audit Sicurezza Informatica Roma</title>
-<meta name="description" content="Audit di sicurezza informatica per PMI a Roma. Verifica reti, GDPR, vulnerabilità. Report in 48h. Prezzo fisso €499,99 IVA inclusa.">
+<meta name="description" content="Audit di sicurezza informatica per PMI a Roma. Verifica reti, GDPR, vulnerabilità. Report in 48h. Prezzo finito €499,99.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -260,11 +260,11 @@ section{padding:70px 1.5rem}
 
   OPZIONE C — urgenza + soluzione (quella attuale migliorata):
   <h1>I tuoi dati<br>sono esposti.<br><em>Lo sai già?</em></h1>
-  <p class="hero-sub">Verifico reti, credenziali, email e conformità GDPR per studi professionali a Roma. Report scritto in 48 ore su cosa rischi — e con tutto già corretto.</p>
+  <p class="hero-sub">Verifico reti, credenziali, email e conformità GDPR per studi professionali a Roma. Report scritto in 48 ore su cosa rischi — con correzioni già apportate.</p>
      ════════════════════════════════════════════ -->
 
 <h1>I tuoi dati<br>sono esposti.<br><em>Lo sai già?</em></h1>
-<p class="hero-sub">Verifico reti, credenziali, email e conformità GDPR per studi professionali a Roma. Report scritto in 48 ore su cosa rischi — e con tutto già corretto.</p>
+<p class="hero-sub">Verifico reti, credenziali, email e conformità GDPR per studi professionali a Roma. Report scritto in 48 ore su cosa rischi — con correzioni già apportate.</p>
 <div class="hero-ctas">
 <a href="#checkup" class="btn-primary">Check-up gratuito</a>
 <a href="#services" class="btn-ghost">Scopri l'audit →</a>
@@ -455,10 +455,11 @@ next();
 <section id="checkup">
 <div class="section-inner">
 <div class="section-label">// check-up rapido</div>
+<div id="dajee">
 <h2 class="section-title">Quanto è sicura<br>la tua attività?</h2>
 <p class="section-sub">8 domande, 2 minuti. Ottieni un'analisi del tuo profilo di rischio reale — gratuita e senza impegno.</p>
 <div class="divider"></div>
-
+</div>
 <div id="cq-container" style="margin-top:2rem">
 
 <div class="cq-prog-bar" style="background:rgba(255,255,255,0.06);border-radius:4px;height:4px;margin-bottom:0.4rem;overflow:hidden"><div id="cq-pbar" style="height:100%;background:var(--accent);border-radius:4px;width:0%;transition:width 0.5s ease"></div></div>
@@ -634,7 +635,7 @@ html+='<div class="cq-ifix">→ '+q.fix+'</div>';
 html+='</div>';
 });
 html+='<div class="cq-cta-box">';
-html+='<p>Vuoi che risolva queste '+issues.length+' criticità? Con l\'Audit + Messa in Sicurezza a <strong style="color:var(--accent)">€499,99 IVA inclusa</strong> le affronto tutte — report consegnato in 48h.</p>';
+html+='<p>Vuoi che risolva queste '+issues.length+' criticità? Con l\'Audit + Messa in Sicurezza a <strong style="color:var(--accent)">€499,99 Prezzo finito</strong> le affronto tutte — report consegnato in 48h.</p>';
 html+='<a href="#contact">Richiedi l\'audit ora →</a>';
 html+='</div>';
 }else{
@@ -648,6 +649,8 @@ document.getElementById('cq-questions').style.display='none';
 document.getElementById('cq-submit').style.display='none';
 document.querySelector('.cq-prog-bar').style.display='none';
 document.querySelector('#cq-container>div:nth-child(2)').style.display='none';
+document.getElementById('dajee').style.display='none';
+window.location.href = "index.html#checkup";
 }
 
 function cqReset(){
@@ -673,7 +676,7 @@ cqRender();
 <div class="service-name">Audit + Messa in Sicurezza</div>
 <div class="service-desc">Il pacchetto completo: non solo scopri i problemi — li risolvo io direttamente.</div>
 <div class="service-price">€499,99</div>
-<div class="service-price-note">IVA inclusa · prezzo fisso · nessun extra</div>
+<div class="service-price-note">prezzo finito · nessun extra</div>
 <ul class="feature-list">
 <li>Scansione completa rete interna e dispositivi</li>
 <li>Verifica configurazione email (SPF, DKIM, DMARC)</li>
@@ -729,7 +732,6 @@ cqRender();
 <div class="photo-placeholder">
 <div class="avatar-big">J</div>
 <p>Jacopo Zito.</p>
-<p class="photo-note">← sostituisci con la tua foto</p>
 </div>
 </div>
 </div>
@@ -789,7 +791,7 @@ cqRender();
 <h3>Cosa succede quando mi contatti</h3>
 <p>Niente presentazioni commerciali, niente pressioni. Ti faccio qualche domanda sulla tua attività per capire se e come posso aiutarti.</p>
 <ul class="cta-list">
-<li>Sopralluogo preliminare gratuito per studi a Roma Est</li>
+<li>Sopralluogo preliminare gratuito</li>
 <li>Risposta garantita entro 24 ore</li>
 <li>Preventivo chiaro prima di iniziare qualsiasi lavoro</li>
 <li>Prezzi fissi: nessuna sorpresa in fattura</li>
@@ -801,7 +803,7 @@ cqRender();
 </section>
 
 <footer>
-<p>© 2025 Jacopo Zito. — Consulente Sicurezza Informatica · Roma · <a href="mailto:jacopo.zito@proton.me">jacopo.zito@proton.me</a></p>
+<p>© 2026 Jacopo Zito. — Consulente Sicurezza Informatica · Roma · <a href="mailto:jacopo.zito@proton.me">jacopo.zito@proton.me</a></p>
 <p style="margin-top:0.5rem;font-size:0.72rem">Prestazione occasionale ex art. 2222 c.c.</p>
 </footer>
 
@@ -822,3 +824,4 @@ if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'});}
 </script>
 </body>
 </html>
+
