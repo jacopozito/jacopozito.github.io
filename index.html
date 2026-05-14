@@ -650,7 +650,7 @@ document.getElementById('cq-submit').style.display='none';
 document.querySelector('.cq-prog-bar').style.display='none';
 document.querySelector('#cq-container>div:nth-child(2)').style.display='none';
 document.getElementById('dajee').style.display='none';
-window.location.href = "index.html#checkup";
+document.getElementById('checkup').scrollIntoView({behavior:'smooth'});
 }
 
 function cqReset(){
@@ -658,6 +658,7 @@ cqAns={};
 document.getElementById('cq-questions').style.display='block';
 document.getElementById('cq-result').style.display='none';
 document.querySelector('.cq-prog-bar').style.display='block';
+document.getElementById('dajee').style.display='block';
 document.querySelector('#cq-container>div:nth-child(2)').style.display='flex';
 cqRender();
 }
