@@ -457,7 +457,7 @@ next();
 <div class="section-label">// check-up rapido</div>
 <div id="dajee">
 <h2 class="section-title">Quanto è sicura<br>la tua attività?</h2>
-<p class="section-sub">8 domande, 2 minuti. Ottieni un'analisi del tuo profilo di rischio reale — gratuita e senza impegno.</p>
+<p class="section-sub">10 domande, 2 minuti. Ottieni un'analisi del tuo profilo di rischio reale — gratuita e senza impegno.</p>
 <div class="divider"></div>
 </div>
 <div id="cq-container" style="margin-top:2rem">
@@ -557,6 +557,18 @@ var cqData=[
  why:'Credenziali condivise tra colleghi rendono impossibile sapere chi ha fatto cosa — violazione GDPR diretta. Se un collaboratore lascia l\'azienda, l\'accesso rimane aperto finché qualcuno non se ne accorge.',
  bad:'Accessi condivisi o non tracciati',
  fix:'Audit account attivi, rimozione accessi non necessari, creazione credenziali personali per ogni utente.'
+},
+{id:'ddos',risk:'med',icon:'🌐',
+ title:'Il tuo sito web è protetto contro attacchi DDoS tramite CDN?',
+ why:'Un attacco DDoS inonda il tuo sito di traffico falso fino a renderlo irraggiungibile — anche per ore o giorni. Per uno studio che prende appuntamenti online, accetta moduli o mostra credenziali, un downtime prolungato significa clienti persi e danno d\'immagine immediato. Senza una CDN, un VPS da pochi euro può essere messo in ginocchio in minuti.',
+ bad:'Sito web esposto ad attacchi DDoS senza protezione',
+ fix:'Attivazione di una CDN con protezione DDoS integrata (es. Cloudflare piano gratuito) — riduce l\'esposizione diretta del server, filtra il traffico malevolo e spesso migliora anche i tempi di caricamento.'
+},
+{id:'remoteaccess',risk:'high',icon:'💻',
+ title:'L\'accesso remoto ai computer dello studio avviene tramite canale sicuro e autenticato?',
+ why:'TeamViewer, AnyDesk o RDP aperti su internet sono tra i vettori d\'attacco più sfruttati contro le PMI. Se non protetti da autenticazione a due fattori e VPN, chiunque può tentare di accedere ai tuoi sistemi dall\'esterno — anche mentre sei chiuso. In molti casi l\'accesso remoto è stato installato da un tecnico anni fa e nessuno lo ha mai verificato.',
+ bad:'Accesso remoto non protetto — possibile porta d\'ingresso per attaccanti',
+ fix:'Audit di tutti gli strumenti di accesso remoto attivi, verifica autenticazione a due fattori, chiusura di sessioni non necessarie e — se possibile — migrazione verso soluzioni VPN sicure al posto di RDP esposto.'
 }
 ];
 
