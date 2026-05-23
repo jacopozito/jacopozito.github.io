@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<title>Materiali Stampa — Jacopo Cybersecurity</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy:  #080e1c;
+  --mid:   #111b2e;
+  --cyan:  #00d4e8;
+  --red:   #e84040;
+  --amber: #f5a623;
+  --muted: #6b7fa0;
+  --bord:  rgba(0,212,232,0.15);
+}
+
+body {
+  background: #b8bfce;
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.lbl {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+  color: #666; text-align: center; padding: 28px 0 10px;
+}
+.wrap    { display: flex; justify-content: center; padding: 0 20px 44px; }
+.bizrow  { display: flex; gap: 32px; justify-content: center; padding: 0 20px 60px; }
+.divline { border: none; border-top: 1px solid #a0a8b8; max-width:600px; margin:0 auto; }
+
+/* ── A5: 559 × 794 px (148mm × 210mm @ 96dpi) ── */
+.a5 {
+  width: 559px;
+  height: 794px;
+  position: relative;
+  overflow: hidden;
+  background: var(--navy);
+  flex-shrink: 0;
+}
+
+/* ── Business card: 321 × 208 px (85mm × 55mm) ── */
+.biz {
+  width: 321px;
+  height: 208px;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+
+/* ╔══════════════════════════════════════════╗
+   ║  FRONTE — tutto absolute                 ║
+   ║                                          ║
+   ║  Pill       top: 32   h: 26              ║
+   ║  Source     top: 76   h: 14              ║
+   ║  H1         top: 98   h: 186  (62px×3)   ║
+   ║  H2         top: 292  h: 22              ║
+   ║  Rule       top: 334  h: 1               ║
+   ║  Desc       top: 352  h: 96              ║
+   ║  CTA        top: 530  h: 120             ║
+   ║  Footer     top: 724  h: 70  (=794)      ║
+   ╚══════════════════════════════════════════╝ */
+
+.front { background: var(--navy); }
+
+/* glow */
+.front::before {
+  content: ''; position: absolute;
+  top: -80px; right: -80px; width: 320px; height: 320px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,212,232,0.07) 0%, transparent 65%);
+}
+.front::after {
+  content: ''; position: absolute;
+  bottom: 100px; left: -60px; width: 200px; height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(232,64,64,0.06) 0%, transparent 65%);
+}
+
+.fp { position: absolute; left: 38px; right: 38px; }
+
+/* Pill */
+.f-pill {
+  top: 32px; height: 26px;
+  display: inline-flex; align-items: center; gap: 7px;
+  border: 1px solid rgba(0,212,232,0.38); border-radius: 100px;
+  color: var(--cyan);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8.5px; letter-spacing: 0.18em; text-transform: uppercase;
+  padding: 0 13px 0 9px;
+}
+.dot { width:5px; height:5px; border-radius:50%; background:var(--cyan); box-shadow:0 0 5px var(--cyan); flex-shrink:0; }
+
+/* Source */
+.f-source {
+  top: 76px; height: 14px;
+  font-size: 10px; font-weight: 500;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--red); line-height: 1;
+}
+
+/* H1 — 3 righe × 62px × line-height 1.0 = 186px */
+.f-h1 {
+  top: 98px; height: 186px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 62px; line-height: 1.0; letter-spacing: 0.02em; color: #fff;
+}
+.f-h1 .c { color: var(--cyan); }
+.f-h1 .d { color: rgba(255,255,255,0.2); }
+
+/* H2 */
+.f-h2 {
+  top: 292px; height: 22px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 20px; line-height: 1; letter-spacing: 0.05em;
+  color: rgba(255,255,255,0.3);
+}
+
+/* Rule */
+.f-rule {
+  top: 334px; height: 1px;
+  background: var(--bord);
+}
+
+/* Desc — max 3 righe × font 13px × lh 1.65 = 64px + buffer = 96px */
+.f-desc {
+  top: 352px; height: 96px;
+  font-size: 13.5px; line-height: 1.65;
+  color: rgba(255,255,255,0.44);
+}
+.f-desc strong { color: rgba(255,255,255,0.84); font-weight: 600; }
+.f-desc .hi    { color: var(--cyan); font-weight: 500; }
+
+/* CTA box — 530 + 120 = 650 */
+.f-cta {
+  top: 490px; height: 122px;
+  background: var(--mid);
+  border: 1px solid rgba(0,212,232,0.22); border-radius: 10px;
+  display: flex; align-items: center; gap: 18px;
+  padding: 0 20px;
+}
+.f-cta::before {
+  content: ''; position: absolute; top: -1px; left: -1px;
+  width: 22px; height: 22px;
+  border-top: 2px solid var(--cyan); border-left: 2px solid var(--cyan);
+  border-radius: 10px 0 0 0;
+}
+.f-cta::after {
+  content: ''; position: absolute; bottom: -1px; right: -1px;
+  width: 22px; height: 22px;
+  border-bottom: 2px solid var(--cyan); border-right: 2px solid var(--cyan);
+  border-radius: 0 0 10px 0;
+}
+.f-qr {
+  width: 80px; height: 80px; flex-shrink: 0;
+  background: #fff; border-radius: 7px; padding: 3px;
+}
+.f-qr img { width: 100%; height: 100%; display: block; }
+.f-cta-lbl {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8px; color: var(--cyan); letter-spacing: 0.16em;
+  text-transform: uppercase; margin-bottom: 6px;
+}
+.f-cta-main {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px; color: #fff; line-height: 1.1;
+  letter-spacing: 0.04em; margin-bottom: 6px;
+}
+.f-cta-url {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px; color: var(--muted);
+}
+
+/* Footer — top:652 + 72 = 724... wait let me recalc
+   CTA: top 490, height 122 → ends 612
+   Gap: 612→652 = 40px
+   Footer top: 652, height: 142 → ends 794 ✓
+*/
+.f-footer {
+  position: absolute;
+  top: 652px; left: 0; right: 0; height: 142px;
+  border-top: 1px solid var(--bord);
+  padding: 20px 38px 0;
+  display: flex; align-items: flex-start; justify-content: space-between;
+}
+.f-name {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700; font-size: 13px; color: #fff;
+}
+.f-role { font-size: 10px; color: var(--muted); margin-top: 3px; }
+.f-contacts {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px; color: rgba(255,255,255,0.35);
+  text-align: right; line-height: 1.8;
+}
+
+
+/* ╔══════════════════════════════════════════╗
+   ║  RETRO — 4 domande, absolute             ║
+   ║                                          ║
+   ║  Eyebrow  top: 30   h: 14                ║
+   ║  Title    top: 54   h: 62  (28px × 2)    ║
+   ║  Item 1   top:138   h:128                ║
+   ║  Item 2   top:278   h:128                ║
+   ║  Item 3   top:418   h:128                ║
+   ║  Item 4   top:558   h:128  → ends: 686   ║
+   ║  Sep      top:706   h:  1                ║
+   ║  Footer   top:722   h: 72  → ends: 794   ║
+   ╚══════════════════════════════════════════╝ */
+
+.back { background: var(--navy); }
+
+.bp { position: absolute; left: 32px; right: 32px; }
+
+.b-ey {
+  top: 30px; height: 14px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8.5px; color: var(--cyan);
+  letter-spacing: 0.18em; text-transform: uppercase; line-height: 1;
+}
+.b-title {
+  top: 54px; height: 62px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px; color: #fff; line-height: 1.1; letter-spacing: 0.03em;
+}
+.b-title span { color: var(--cyan); }
+
+/* 4 items: top 138, 278, 418, 558 — ciascuno h:128 */
+.b-item {
+  height: 128px;
+  background: var(--mid);
+  border: 1px solid var(--bord);
+  border-left: 3px solid var(--red);
+  border-radius: 0 8px 8px 0;
+  display: flex; align-items: flex-start; gap: 14px;
+  padding: 18px 16px;
+  overflow: hidden;
+}
+.b-item.mid { border-left-color: var(--amber); }
+
+.b1 { top: 138px; }
+.b2 { top: 278px; }
+.b3 { top: 418px; }
+.b4 { top: 558px; }
+
+.b-icon { font-size: 22px; flex-shrink: 0; margin-top: 1px; line-height: 1; }
+.b-q {
+  font-family: 'Inter', sans-serif;
+  font-size: 13.5px; font-weight: 700; color: #fff;
+  line-height: 1.3; margin-bottom: 6px;
+}
+.b-a {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px; font-weight: 400;
+  color: var(--muted); line-height: 1.5;
+}
+
+/* Sep */
+.b-sep {
+  position: absolute;
+  top: 706px; left: 32px; right: 32px; height: 1px;
+  background: var(--bord);
+}
+
+/* Footer retro: top 722, height 72, ends 794 */
+.b-footer {
+  position: absolute;
+  top: 710px; left: 32px; right: 32px; height: 72px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.b-cta {
+  background: var(--cyan); border-radius: 7px; padding: 10px 18px;
+}
+.b-cta-t {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 15px; letter-spacing: 0.05em; color: var(--navy);
+}
+.b-cta-u {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12.5px; color: rgba(8,14,28,0.55); margin-top: 2px;
+}
+.b-info { text-align: right; }
+.b-bname {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 20px; letter-spacing: 0.05em; color: #fff;
+}
+.b-brole {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12.5px; color: var(--muted); margin-top: 2px;
+}
+.b-phone { font-size: 12.5px; color: var(--cyan); margin-top: 3px; }
+
+
+/* ── BIGLIETTO FRONTE ── */
+.card-f {
+  background: var(--navy);
+  display: flex; flex-direction: column; justify-content: space-between;
+  padding: 20px 22px; position: relative; overflow: hidden;
+}
+.card-f::before {
+  content: ''; position: absolute; top: -50px; right: -50px;
+  width: 150px; height: 150px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,212,232,0.08) 0%, transparent 70%);
+}
+.c-top  { display: flex; justify-content: space-between; align-items: flex-start; }
+.c-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px; letter-spacing: 0.04em; color: #fff; line-height: 1;
+}
+.c-name span { color: var(--cyan); }
+.c-role {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 7px; color: var(--muted); letter-spacing: 0.1em;
+  text-transform: uppercase; margin-top: 5px;
+}
+.c-photo {
+  width: 42px; height: 42px; border-radius: 50%;
+  background: var(--mid); border: 1.5px solid var(--cyan);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 17px; flex-shrink: 0; overflow: hidden;
+}
+.c-mid {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 7.5px; color: rgba(255,255,255,0.28); letter-spacing: 0.12em;
+  text-align: center;
+  border-top: 1px solid var(--bord); border-bottom: 1px solid var(--bord);
+  padding: 6px 0;
+}
+.c-mid span { color: var(--cyan); }
+.c-contacts { display: flex; flex-direction: column; gap: 4px; }
+.c-line { display: flex; align-items: center; gap: 7px; }
+.c-icon { font-size: 9px; width: 13px; text-align: center; opacity: .6; flex-shrink: 0; }
+.c-val  { font-family: 'JetBrains Mono', monospace; font-size: 8px; color: rgba(255,255,255,0.7); }
+
+/* ── BIGLIETTO RETRO ── */
+.card-b {
+  background: #fff;
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center; gap: 10px;
+  padding: 14px 18px; position: relative; overflow: hidden;
+}
+.card-b::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--navy) 0%, var(--cyan) 50%, var(--navy) 100%);
+}
+.card-b::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--navy) 0%, var(--cyan) 50%, var(--navy) 100%);
+}
+.cb-qr { width:74px; height:74px; background:var(--navy); border-radius:7px; padding:4px; flex-shrink:0; }
+.cb-qr img { width:100%; height:100%; display:block; }
+.cb-tag { font-family:'Inter',sans-serif; font-size:11px; font-weight:700; color:var(--navy); text-align:center; line-height:1.4; }
+.cb-url { font-family:'JetBrains Mono',monospace; font-size:7.5px; color:#5a7090; text-align:center; }
+
+@media print {
+  body { background: white; }
+  .lbl, .divline { display: none; }
+  .wrap, .bizrow { padding: 0; margin: 0; display: block; }
+  .a5  { width: 148mm; height: 210mm; page-break-after: always; }
+  .biz { width: 85mm;  height: 55mm;  page-break-after: always; }
+}
+</style>
+</head>
+<body>
+
+
+<!-- ══════════ FRONTE ══════════ -->
+<p class="lbl">◆ Volantino A5 — Fronte · 148 × 210 mm</p>
+<div class="wrap">
+<div class="a5 front">
+
+  <!-- Pill -->
+  <div class="fp f-pill" style="position:absolute; top:32px; left:38px;">
+    <span class="dot"></span>
+    Checkup gratuito &nbsp;·&nbsp; Difendi la tua impresa
+  </div>
+
+  <!-- Source -->
+  <div class="fp f-source" style="position:absolute; top:76px;">
+    Rapporto Clusit 2025 — Italia
+  </div>
+
+  <!-- H1 -->
+  <div class="fp f-h1" style="position:absolute; top:98px;">
+    <span class="c">+61%</span><br>
+    <span class="d">di attacchi</span><br>
+    alle piccole e medie imprese
+  </div>
+
+  <!-- H2 -->
+  <div class="fp f-h2" style="position:absolute; top:352px;">
+    In un solo anno. Nessuna è al sicuro.
+  </div>
+
+  <!-- Rule -->
+  <div class="fp f-rule" style="position:absolute; top:374px;"></div>
+
+  <!-- Desc -->
+  <div class="fp f-desc" style="position:absolute; top:390px;">
+    <strong>I dati dei tuoi clienti hanno un valore enorme </strong>— e i criminali informatici lo sanno meglio di te.
+    Un attacco informatico rimane invisibile in media per <span class="hi">21 giorni</span>: nel frattempo i 
+    tuoi archivi vengono copiati, i tuoi dati rubati, il tuo gestionale cifrato. Quando te ne accorgi, potrebbe essere già tardi. La legge non perdona: hai sole <span class="hi">72 ore</span> per segnalare una violazione al Garante. Chi non rispetta i tempi riceve una sanzione minima di <span class="hi">€10.000</span> — automatica, indipendentemente dal danno subito.
+  </div>
+
+  <!-- CTA -->
+  <div class="fp f-cta" style="position:absolute; top:560px;">
+    <div class="f-qr">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&color=080e1c&bgcolor=ffffff&data=https://jacopozito.it/#checkup" alt="QR">
+    </div>
+    <div>
+      <div class="f-cta-lbl">→ Scansiona ora — è completamente gratuito</div>
+      <div class="f-cta-main">Scopri in 2 minuti i rischi<br> reali del tuo studio</div>
+      <div class="f-cta-url">https://jacopozito.it/#checkup</div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="f-footer" style="position:absolute;top:700px;">
+    <div>
+      <div class="f-name">Jacopo Zito</div>
+      <div class="f-role">Esperto di Difesa Informatica · Roma</div>
+    </div>
+    <div class="f-contacts">
+      📱 +39 324 602 8103<br>
+      🔗 linkedin.com/in/jacopo-zito-15b6843b6<br>
+      🌐 https://jacopozito.it
+    </div>
+  </div>
+
+</div>
+</div>
+
+<hr class="divline">
+
+
+<!-- ══════════ RETRO ══════════ -->
+<p class="lbl">◆ Volantino A5 — Retro · 148 × 210 mm</p>
+<div class="wrap">
+<div class="a5 back">
+
+  <div class="bp b-ey" style="position:absolute; top:30px;">
+    4 domande che ogni titolare dovrebbe farsi
+  </div>
+
+  <div class="bp b-title" style="position:absolute; top:54px;">
+    Il tuo studio è davvero<br><span>al sicuro?</span>
+  </div>
+
+  <!-- Item 1 -->
+  <div class="bp b-item b1" style="position:absolute;">
+    <div class="b-icon">⚖️</div>
+    <div>
+      <div class="b-q">Sei certo di non essere già esposto a una sanzione GDPR?</div>
+      <div class="b-a">Non serve subire un attacco per essere multati: basta una configurazione sbagliata o un documento non protetto. Il Garante può aprire un'istruttoria in qualsiasi momento — le sanzioni partono da €10.000 e arrivano fino al 4% del fatturato annuo.</div>
+    </div>
+  </div>
+
+  <!-- Item 2 -->
+  <div class="bp b-item b2" style="position:absolute;">
+    <div class="b-icon">👁️</div>
+    <div>
+      <div class="b-q">Hai mai controllato se le tue password sono già state rubate e vendute nel dark web?</div>
+      <div class="b-a">Ogni settimana migliaia di database vengono violati e le credenziali finiscono in vendita online. Se hai riusato una password su più servizi basta che uno solo sia compromesso per esporre tutto il resto.</div>
+    </div>
+  </div>
+
+  <!-- Item 3 -->
+  <div class="bp b-item b3" style="position:absolute;">
+    <div class="b-icon">📧</div>
+    <div>
+      <div class="b-q">Hai controllato che nessuno possa inviare email ai tuoi clienti fingendo di essere te?</div>
+      <div class="b-a">SPF, DKIM e DMARC sono tre impostazioni che proteggono il tuo dominio email. Senza di esse, chiunque può scrivere ai tuoi clienti usando il tuo nome e la tua firma. Le truffe sui bonifici iniziano quasi sempre così.</div>
+    </div>
+  </div>
+
+  <!-- Item 4 -->
+  <div class="bp b-item b4" style="position:absolute;">
+    <div class="b-icon">📶</div>
+    <div>
+      <div class="b-q">La rete WiFi dei clienti è separata da quella dei tuoi computer?</div>
+      <div class="b-a">Se usi una rete unica, chiunque entri nel tuo studio — un cliente, un tecnico di passaggio, persino qualcuno dal parcheggio — può accedere ai tuoi computer e al gestionale con il proprio smartphone, senza password, senza lasciare tracce.</div>
+    </div>
+  </div>
+
+  <div class="b-sep"></div>
+
+  <div class="b-footer">
+    <div class="b-cta">
+      <div class="b-cta-t">→ Fai il checkup gratuito</div>
+      <div class="b-cta-u">https://jacopozito.it/#checkup</div>
+    </div>
+    <div class="b-info">
+      <div class="b-bname">Jacopo Zito</div>
+      <div class="b-brole">Esperto di Difesa Informatica <br> Roma</div>
+      <div class="b-phone">📱 +39 324 602 8103</div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<hr class="divline">
+
+
+<!-- ══════════ BIGLIETTI ══════════ -->
+<p class="lbl">◆ Biglietto da visita · Fronte + Retro · 85 × 55 mm</p>
+<div class="bizrow">
+
+  <div class="biz card-f">
+    <div class="c-top">
+      <div>
+        <div class="c-name">Jacopo <span>Zito</span></div>
+        <div class="c-role">Esperto di Difesa Informatica · Roma</div>
+      </div>
+      <!-- Sostituire 👤 con: <img src="foto.jpg" style="width:100%;height:100%;object-fit:cover"> -->
+      <div class="c-photo">👤</div>
+    </div>
+    <div class="c-mid">Analisi dei Rischi <span>·</span> Messa in Sicurezza <span>·</span> Conformità GDPR</div>
+    <div class="c-contacts">
+      <div class="c-line"><div class="c-icon">📱</div><div class="c-val">+39 324 602 8103</div></div>
+      <div class="c-line"><div class="c-icon">🌐</div><div class="c-val">https://jacopozito.it/#checkup</div></div>
+      <div class="c-line"><div class="c-icon">🔗</div><div class="c-val">linkedin.com/in/jacopo-zito-15b6843b6</div></div>
+    </div>
+  </div>
+
+  <div class="biz card-b">
+    <div class="cb-qr">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&color=f0f4fa&bgcolor=080e1c&data=https://jacopozito.it/#checkup" alt="QR">
+    </div>
+    <div class="cb-tag">Checkup gratuito<br>di sicurezza</div>
+    <div class="cb-url">https://jacopozito.it/#checkup</div>
+  </div>
+
+</div>
+
+
+<!-- NOTE -->
+<div style="max-width:460px;margin:0 auto 80px;padding:0 20px;font-family:'Inter',sans-serif;font-size:13px;color:#445;line-height:1.85;">
+  <p style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#999;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:12px;">— Da modificare prima di stampare —</p>
+  <p><strong>1.</strong> <code>Zito</code> → il tuo cognome</p>
+  <p><strong>2.</strong> <code>3XX XXX XXXX</code> → il tuo numero di telefono</p>
+  <p><strong>3.</strong> <code>https://jacopozito.it/#checkup</code> → il tuo URL reale (il QR si aggiorna da solo)</p>
+  <p><strong>4.</strong> <code>jacopo-xxx</code> → il tuo slug LinkedIn</p>
+  <p><strong>5.</strong> <code>👤</code> → <code>&lt;img src="foto.jpg" style="width:100%;height:100%;object-fit:cover"&gt;</code></p>
+  <p style="margin-top:10px;color:#888;"><strong>Stampa:</strong> Chrome → Stampa → Margini: nessuno → Scala: 100%</p>
+</div>
+
+</body>
+</html>
