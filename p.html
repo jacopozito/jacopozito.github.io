@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Società dell'Informazione - Presentazione Maturità</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        /* Impostazioni Globali e per la Stampa PDF */
+        :root {
+            --bg-color: #f8fafc;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --accent-primary: #1e3a8a; /* Blu notte */
+            --accent-secondary: #3b82f6; /* Azzurro */
+            --card-bg: #ffffff;
+        }
+
+        @page {
+            size: A4 landscape;
+            margin: 0;
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+        }
+
+        /* Layout della Singola Slide */
+        .slide {
+            width: 297mm;
+            height: 209mm;
+            padding: 20mm;
+            background-color: var(--bg-color);
+            page-break-after: always;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .slide:last-child {
+            page-break-after: auto;
+        }
+
+        /* Tipografia */
+        h1 {
+            font-size: 3.5rem;
+            color: var(--accent-primary);
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            color: var(--accent-primary);
+            font-weight: 800;
+            border-bottom: 4px solid var(--accent-secondary);
+            padding-bottom: 10px;
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            color: var(--accent-secondary);
+            font-weight: 600;
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+
+        p, li {
+            font-size: 1.25rem;
+            line-height: 1.6;
+            color: var(--text-main);
+        }
+
+        ul {
+            padding-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        li {
+            margin-bottom: 0.8rem;
+        }
+
+        strong {
+            color: var(--accent-primary);
+            font-weight: 600;
+        }
+
+        .highlight {
+            color: var(--accent-secondary);
+            font-weight: 800;
+        }
+
+        /* Struttura a Griglia e Componenti */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05);
+            border: 1px solid #e2e8f0;
+            height: 100%;
+        }
+
+        /* Immagini */
+        .img-container {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .slide-img {
+            width: 100%;
+            height: auto;
+            max-height: 320px;
+            object-fit: contain;
+            border-radius: 12px;
+            box-shadow: 0 15px 35px rgba(15, 23, 42, 0.1);
+            border: 2px solid #cbd5e1;
+            margin-bottom: 15px;
+        }
+
+        .caption {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            background: #f1f5f9;
+            padding: 10px;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent-secondary);
+            text-align: left;
+        }
+
+        /* Footer Slide */
+        .footer {
+            position: absolute;
+            bottom: 10mm;
+            left: 20mm;
+            right: 20mm;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            border-top: 1px solid #cbd5e1;
+            padding-top: 10px;
+            font-weight: 600;
+        }
+
+        /* Decorazioni */
+        .badge-container {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+            justify-content: center;
+        }
+
+        .badge {
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--accent-primary);
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: 800;
+            font-size: 1.2rem;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SLIDE 1: TITOLO -->
+    <div class="slide" style="text-align: center; align-items: center;">
+        <h1 style="max-width: 90%;">La Società dell'Informazione</h1>
+        <p style="font-size: 2rem; color: var(--text-muted); margin-top: 0; font-weight: 300;">
+            Tra Connessione Globale, Automazione Algoritmica<br>e Alienazione Umana
+        </p>
+        
+        <div class="badge-container">
+            <span class="badge">Sistemi e Reti</span>
+            <span class="badge">Informatica</span>
+            <span class="badge">English</span>
+            <span class="badge">Italiano</span>
+        </div>
+        
+        <div style="position: absolute; bottom: 30mm; text-align: center; width: 100%; left: 0;">
+            <p style="color: var(--text-muted); font-weight: 600;">Percorso Multidisciplinare - Esame di Stato</p>
+        </div>
+    </div>
+
+    <!-- SLIDE 2: SISTEMI E RETI -->
+    <div class="slide">
+        <h2>Sistemi: Architettura TCP/IP</h2>
+        <div class="grid-2" style="height: 100%;">
+            <div class="card">
+                <h3>Infrastruttura di Rete</h3>
+                <p>La pila TCP/IP organizza il flusso di dati in un'architettura gerarchica, basata sull'incapsulamento:</p>
+                <ul>
+                    <li><strong>Livello di Accesso:</strong> Gestione hardware e formattazione in frame. Identificazione fisica tramite <em>MAC Address</em>.</li>
+                    <li><strong>Livello Internet:</strong> Routing e instradamento logico planetario dei pacchetti tramite <em>Protocollo IP</em>.</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>Comunicazione End-to-End</h3>
+                <p>Il <strong>Livello di Trasporto</strong> gestisce la connessione tra processi remoti:</p>
+                <ul>
+                    <li><span class="highlight">TCP:</span> Orientato alla connessione e affidabile. Utilizza il <em>three-way handshake</em> per garantire stabilità.</li>
+                    <li><span class="highlight">UDP:</span> Connectionless e non affidabile, ma ottimizzato per la massima velocità.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer"><span>Sistemi e Reti</span><span>Slide 2</span></div>
+    </div>
+
+    <!-- SLIDE 3: PROTOCOLLI APPLICATIVI -->
+    <div class="slide">
+        <h2>Sistemi: Protocolli Applicativi</h2>
+        <div class="card">
+            <h3>Livello Applicazione e Sicurezza</h3>
+            <p>Interfaccia diretta per l'utente che definisce la semantica dello scambio dati:</p>
+            <ul style="margin-top: 20px;">
+                <li style="margin-bottom: 20px;">
+                    <span class="highlight">HTTPS (Porta 443):</span> Navigazione web crittografata. Implementa i certificati <strong>TLS/SSL</strong> al di sopra del livello di trasporto per garantire l'integrità e la riservatezza dei pacchetti durante il transito.
+                </li>
+                <li style="margin-bottom: 20px;">
+                    <span class="highlight">FTP (Porte 20/21):</span> Trasferimento file asincrono. Utilizza un'architettura con connessioni separate per i comandi (21) e il traffico dati (20).
+                </li>
+                <li>
+                    <span class="highlight">SSH (Porta 22):</span> Accesso remoto e gestione sicura dei terminali.
+                </li>
+            </ul>
+        </div>
+        <div class="footer"><span>Sistemi e Reti</span><span>Slide 3</span></div>
+    </div>
+
+    <!-- SLIDE 4: INFORMATICA -->
+    <div class="slide">
+        <h2>Informatica: Python e Automazione AI</h2>
+        <div class="grid-2">
+            <div>
+                <h3>Il Nuovo Paradigma Software</h3>
+                <p>Siamo passati dalla scrittura di codice puramente imperativo all'orchestrazione intelligente.</p>
+                <ul>
+                    <li><strong>Python come Standard:</strong> Linguaggio ad alto livello, tipizzazione dinamica ed enorme ecosistema di librerie.</li>
+                    <li><strong>Codice Probabilistico:</strong> Il software moderno si adatta al contesto.</li>
+                </ul>
+            </div>
+            <div class="card" style="background-color: #eff6ff; border-color: #bfdbfe;">
+                <h3>L'Intervento dell'AI nello Sviluppo</h3>
+                <ul>
+                    <li><span class="highlight">Assisted Coding:</span> Modelli generativi che assistono lo sviluppatore nel bug-fixing e nell'identificazione di vulnerabilità in tempo reale.</li>
+                    <li><span class="highlight">Integrazione API:</span> I software comunicano direttamente con le intelligenze artificiali (LLM) permettendo l'analisi di dati non strutturati.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer"><span>Informatica</span><span>Slide 4</span></div>
+    </div>
+
+    <!-- SLIDE 5: DIMOSTRAZIONE PRATICA -->
+    <div class="slide">
+        <h2>Informatica: Dimostrazione Pratica</h2>
+        <p style="margin-top: -10px; margin-bottom: 20px;"><strong>Progetto "Wine Inventory Manager" (Python):</strong> Esempio di <em>Assisted Coding</em> (bug-fixing) e <em>Chiamate API</em> in un gestionale reale.</p>
+        
+        <div class="grid-2">
+            <div class="img-container">
+                <img src="screen1.jpg" alt="Prima fase gestionale" class="slide-img">
+                <div class="caption">
+                    <strong>Fase 1:</strong> Inserimento di un record incompleto (Chardonnay). L'utente preme il tasto <span class="highlight">AI Fill</span>, scatenando una richiesta API al modello AI.
+                </div>
+            </div>
+            <div class="img-container">
+                <img src="screen2.jpg" alt="Seconda fase gestionale" class="slide-img">
+                <div class="caption">
+                    <strong>Fase 2:</strong> Risposta API in formato JSON. L'AI restituisce dinamicamente la gradazione (13.0%), le note organolettiche e gli abbinamenti.
+                </div>
+            </div>
+        </div>
+        <div class="footer"><span>Informatica - Caso Studio Applicato</span><span>Slide 5</span></div>
+    </div>
+
+    <!-- SLIDE 6: CYBERSECURITY -->
+    <div class="slide">
+        <h2>English: Cybersecurity Targets</h2>
+        <div class="grid-2">
+            <div class="card">
+                <h3>The Digital Shield</h3>
+                <p>Cybersecurity is no longer just technical; it protects democracy and freedom.</p>
+                <ul>
+                    <li><span class="highlight">The CIA Triad:</span> Core principles guaranteeing <strong>Confidentiality</strong>, <strong>Integrity</strong>, and <strong>Availability</strong>.</li>
+                    <li><strong>AI Threats:</strong> Generative models are used to craft sophisticated ransomware and flawless NLP-based phishing attacks.</li>
+                </ul>
+            </div>
+            <div class="card" style="background-color: #fef2f2; border-color: #fecaca;">
+                <h3 style="color: #b91c1c;">The Human Factor</h3>
+                <p>The primary vulnerability is almost never the software, but human psychology.</p>
+                <p>Through <span class="highlight" style="color: #b91c1c;">Social Engineering</span>, attackers bypass advanced encryption by manipulating individuals into subverting protocols and breaking the chain of trust.</p>
+            </div>
+        </div>
+        <div class="footer"><span>English - Technical Language</span><span>Slide 6</span></div>
+    </div>
+
+    <!-- SLIDE 7: ORWELL -->
+    <div class="slide">
+        <h2>English: Orwellian Control</h2>
+        <div class="card">
+            <h3>Data Weaponization in '1984'</h3>
+            <p>The manipulation of data and the vulnerability of the human factor connect directly to George Orwell's dystopian vision:</p>
+            <ul style="margin-top: 20px;">
+                <li style="margin-bottom: 15px;">
+                    <span class="highlight">The Telescreen:</span> A technological node acting as a psychological <em>Panopticon</em>. Constant surveillance removes the boundary between private and public life, enforcing total conformity.
+                </li>
+                <li>
+                    <span class="highlight">Newspeak:</span> Linguistic engineering designed to shrink human vocabulary. By erasing the words required to articulate dissent, the Party makes <strong style="color: #b91c1c;">Thoughtcrime</strong> literally impossible.
+                </li>
+            </ul>
+        </div>
+        <div class="footer"><span>English Literature - George Orwell</span><span>Slide 7</span></div>
+    </div>
+
+    <!-- SLIDE 8: ITALIANO (PIRANDELLO) -->
+    <div class="slide">
+        <h2>Italiano: Luigi Pirandello e l'Identità</h2>
+        <div class="grid-2">
+            <div>
+                <p>La riduzione dell'individuo a un set di credenziali informatiche rievoca la crisi dell'identità primonovecentesca studiata da Pirandello.</p>
+                <ul style="margin-top: 20px;">
+                    <li><strong>Vitalismo:</strong> La vita è concepita come un flusso magmatico, caotico e inarrestabile.</li>
+                    <li><strong>La 'Forma':</strong> La maschera rigida imposta dalle convenzioni sociali per arginare l'angoscia del flusso vitale.</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>L'Identità Digitale come Forma</h3>
+                <p>Oggi, la "Forma" pirandelliana si è evoluta: coincide con la nostra <span class="highlight">Identità Digitale</span>.</p>
+                <p>La complessità biologica ed emotiva dell'essere umano viene cristallizzata, standardizzata e ingabbiata all'interno di <strong>record di database e profili algoritmici</strong>.</p>
+            </div>
+        </div>
+        <div class="footer"><span>Letteratura Italiana - Il Primo Novecento</span><span>Slide 8</span></div>
+    </div>
+
+    <!-- SLIDE 9: MATTIA PASCAL & SERAFINO GUBBIO -->
+    <div class="slide">
+        <h2>Italiano: Morte Civile e Alienazione</h2>
+        <div class="grid-2">
+            <div class="card">
+                <h3>Il fu Mattia Pascal</h3>
+                <p>Adriano Meis tenta di vivere fuori dalla "Forma", ma fallisce: la società riconosce solo il <strong>dato burocratico</strong>.</p>
+                <p>Ciò anticipa l'<span class="highlight">Identity Theft</span>: come Meis, l'utente moderno privato delle sue credenziali (o hackerato) subisce un'esclusione totale dai servizi, andando incontro a una vera <em>morte civile ed economica</em>.</p>
+            </div>
+            <div class="card">
+                <h3>Serafino Gubbio Operatore</h3>
+                <p>La critica alla meccanizzazione.</p>
+                <p>Serafino, ridotto a "una mano che gira la manovella", perde la propria interiorità. Il suo <strong>mutismo finale</strong> rappresenta la resa definitiva dell'uomo all'apparato tecnologico, che diventa soggetto attivo e alienante.</p>
+            </div>
+        </div>
+        <div class="footer"><span>Letteratura Italiana - Le Opere</span><span>Slide 9</span></div>
+    </div>
+
+    <!-- SLIDE 10: CONCLUSIONI -->
+    <div class="slide" style="text-align: center; align-items: center;">
+        <h2>Sintesi e Conclusioni</h2>
+        <div class="card" style="max-width: 85%; margin-top: 20px; text-align: left; background-color: #f8fafc;">
+            <p>Questo percorso multidisciplinare dimostra l'interconnessione profonda tra la struttura ingegneristica e l'umanistica:</p>
+            <ul>
+                <li><span class="highlight">Sistemi e Informatica</span> forniscono gli strumenti architetturali e i modelli AI (Python) necessari per governare e automatizzare l'informazione globale.</li>
+                <li>La <span class="highlight">Cybersecurity</span> e la letteratura (<span class="highlight">Orwell e Pirandello</span>) impongono un inderogabile <strong>monitoraggio etico</strong> sulle vulnerabilità umane.</li>
+            </ul>
+            <div style="margin-top: 30px; padding: 20px; background-color: #e0e7ff; border-radius: 10px; border-left: 5px solid var(--accent-primary);">
+                <p style="margin: 0; font-weight: 600; color: var(--accent-primary); text-align: center;">
+                    "La tecnologia deve rimanere uno strumento di emancipazione, tutelando costantemente l'individuo biologico affinché la sua identità reale non venga mai alienata o soffocata dalla maschera digitale."
+                </p>
+            </div>
+        </div>
+        <div class="footer"><span>Fine Presentazione</span><span>Slide 10</span></div>
+    </div>
+
+</body>
+</html>
